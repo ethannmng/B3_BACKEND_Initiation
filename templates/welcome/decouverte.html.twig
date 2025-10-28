@@ -1,0 +1,52 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Découerte des syntaxes Twig {% endblock %}
+
+{% block body %}
+    {# PASSAGE VARIABLE SIMPLE #}
+    <h2>{{ page_title | upper }}</h2>
+
+    <p>
+        Ceci est un exemple pour illustrer les principales syntaxees de Twig.
+        Nous sommes le <strong>{{ "now" | date("d/m/Y à H:i") }}</strong>.
+    </p>
+
+    <hr>
+
+    <h2>Liste des utilisateurs</h2>
+
+    {% if users is not empty %}
+        {% for user in users %}
+            <div class="user-card {% if user.isAdmin %}admin{% else %}user{% endif %}">
+                <h3>Utilisateur: <strong>{{ user.name }}</strong></h3>
+
+                {% if user.isAdmin %}
+                    <p>Rôle: <strong>Administrateur</strong></p>
+                {% else %}
+                    <p>Rôle: <strong>Utilisateur standard</strong></p>
+                {% endif %}
+
+                {% if user.post > 10 %}
+                    <p>Très actif ! Nombre de publications: <strong>{{ user.post }}</strong></p>
+                {% elseif user.post > 0 %}
+                    <p>Nombre de publications: <strong>{{ user.post }}</strong></p>
+                {% else %}
+                    <p>Cet utilisateur n'a pas encore publié de contenu.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun utilisateur trouvé.</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Démonstration des filtres</h2>
+    <ul>
+        <li>Texte original: "{{ simple_text }}"</li>
+        <li>Texte en majuscules: "{{ simple_text | upper }}"</li>
+        <li>Texte en minuscules: "{{ simple_text | lower }}"</li>
+        <li>Texte tronqué (10 caractères): "{{ simple_text | slice(0, 10) ~ '...' }}"</li>
+        <li>Texte échappé HTML: "{{ simple_text | e }}"</li>
+    </ul>
+{% endblock %}

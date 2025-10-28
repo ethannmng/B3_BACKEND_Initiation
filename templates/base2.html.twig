@@ -5,6 +5,13 @@
         <title>
             {% block title %}Bienvenue !{% endblock %}
         </title>
+        <style>
+            body { font-family: sans-serif; padding: 2em; }
+            h1, h2 { color: #333; }
+            .user-card { border: 1px solid #ccc; padding: 1em; border-radius: 5px; max-width: 300px; }
+            .admin { background-color: #e0f7fa; }
+            .user { background-color: #fffde7; }
+        </style>
     </head>
     <body>
         {% block body %}{% endblock %}
